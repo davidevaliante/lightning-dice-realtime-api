@@ -1,0 +1,17 @@
+config:
+  target: "http://localhost:5000"
+  socketio:
+    transports: ["websocket"]
+  engines:
+   socketio-v3: {}
+  phases:
+    - duration: 30 # Run scenario for 10 seconds
+      arrivalCount: 2000 # Create 20 virtual users per scenario
+      arrivalrate : 20
+scenarios:
+  - engine: socketio-v3
+    flow:
+      - emit:
+          channel: "1h"
+          data: "hello world!"
+      - think: 20

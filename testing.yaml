@@ -1,0 +1,16 @@
+config:
+  target: "https://crazytime.spike-realtime-api.eu"
+  socketio:
+    transports: ["websocket"]
+  engines:
+   socketio-v3: {}
+  phases:
+    - duration: 30 # Run scenario for 10 seconds
+      arrivalCount: 900 # Create 20 virtual users per scenario
+scenarios:
+  - engine: socketio-v3
+    flow:
+      - emit:
+          channel: "1h"
+          data: "hello world!"
+      - think: 20
