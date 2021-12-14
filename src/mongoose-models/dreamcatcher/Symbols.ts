@@ -1,10 +1,3 @@
-export enum DreamCatcherSymbol{
-    one,
-    two,
-    five,
-    ten,
-    twenty,
-    fourty,
-    twox,
-    sevenx
+export enum LightningSymbol {
+  one,
 }
