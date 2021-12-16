@@ -26,7 +26,7 @@ export const getStatsInTheLastHours = async (hoursToCheck: number) => {
 
   const spinsInTimeFrame = (await SpinModel.find(
     { timeOfSpin: { $gte: timeSince } },
-    "total"
+    ["total", "multiplier"]
   ).sort({ timeOfSpin: -1 })) as LightningDiceSpin[];
 
   const totalSpins = spinsInTimeFrame.length;
@@ -38,12 +38,24 @@ export const getStatsInTheLastHours = async (hoursToCheck: number) => {
       (symbol: number) => {
         const timeSince = spinsInTimeFrame.map((s) => s.total).indexOf(symbol);
 
+        const totalSymbolSpins = spinsInTimeFrame.filter(
+          (spin) => spin.total == symbol
+        );
+
+        const totalSymbolMultiplier = totalSymbolSpins.reduce(
+          (p, c) => p + parseInt(c.multiplier.split("X")[0]),
+          0
+        );
+
+        const avg = Math.ceil(totalSymbolMultiplier / totalSymbolSpins.length);
+
         return new SymbolStats(
           symbol,
           (spinsInTimeFrame.filter((it) => it.total === symbol).length * 100) /
             totalSpins,
           timeSince != -1 ? timeSince : totalSpins,
-          spinsInTimeFrame.filter((it) => it.total === symbol).length
+          spinsInTimeFrame.filter((it) => it.total === symbol).length,
+          avg
         );
       }
     )

@@ -13,6 +13,7 @@ export class SymbolStats {
     public symbol: number,
     public percentage: number,
     public spinSince: number,
-    public lands: number
+    public lands: number,
+    public avgMultiplier: number
   ) {}
 }
