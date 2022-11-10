@@ -39,6 +39,8 @@ const io = new Server(httpServer, {
             'https://spikemultilanguage.toply.info',
             'https://www.spikeslot.com',
             'https://spikeslot.com',
+            'https://spikeslotgratis.com',
+            'https://www.spikeslotgratis.com',
         ],
         methods: ['GET', 'POST'],
     },
