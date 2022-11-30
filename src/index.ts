@@ -70,16 +70,16 @@ io.on('connection', (socket: Socket) => {
     })
 })
 
-Object.values(TimeFrame).forEach((tf) => {
-    cron.schedule('*/5 * * * * *', async () => {
-        const stats = await getStatsInTheLastHours(timeFrameValueToHours(tf))
-        const spins = await getLatestSpins(25)
+const tf = TimeFrame.TWENTY_FOUR_HOURS
 
-        io.to(tf).emit(tf, {
-            timeFrame: tf,
-            spins,
-            stats,
-        })
+cron.schedule('*/5 * * * * *', async () => {
+    const stats = await getStatsInTheLastHours(timeFrameValueToHours(tf))
+    const spins = await getLatestSpins(25)
+
+    io.to(tf).emit(tf, {
+        timeFrame: tf,
+        spins,
+        stats,
     })
 })
 
