@@ -35,12 +35,13 @@ cache.put('24-hours-cache', {
 const io = new Server(httpServer, {
     cors: {
         origin: [
-            'http://localhost:3000',
-            'https://spikemultilanguage.toply.info',
-            'https://www.spikeslot.com',
-            'https://spikeslot.com',
-            'https://spikeslotgratis.com',
-            'https://www.spikeslotgratis.com',
+            '* ',
+            // 'http://localhost:3000',
+            // 'https://spikemultilanguage.toply.info',
+            // 'https://www.spikeslot.com',
+            // 'https://spikeslot.com',
+            // 'https://spikeslotgratis.com',
+            // 'https://www.spikeslotgratis.com',
         ],
         methods: ['GET', 'POST'],
     },
